@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">igra memorije</string>
+    <string name="igra_memorije">Igra memorije!</string>
+    <string name="igraj">Igraj</string>
+    <string name="izadji">Izadji</string>
+    <string name="izaberi_velicinu">Izaberi velicinu</string>
+    <string name="x">x</string>
+    <string name="potvrdi">Potvrdi</string>
+</resources>
