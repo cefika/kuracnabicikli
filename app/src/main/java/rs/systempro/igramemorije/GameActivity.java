@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -44,6 +46,23 @@ public class GameActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         final int h= myIntent.getIntExtra("height", 4);
         final int w = myIntent.getIntExtra("width",3);
+        //;
+
+        time=0;
+        final Timer t=new Timer();
+        final TextView tv= (TextView)findViewById(R.id.twTime);
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                time++;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tv.setText(time+"s");
+                    }
+                });
+            }
+        },1000,1000);
 
         images=new ArrayList<>();
         solve=0;
@@ -71,6 +90,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 int rootH=rlRoot.getHeight();
                 int rootW=rlRoot.getWidth();
+
                 Toast.makeText(getApplicationContext(),rootH+" - "+rootW,Toast.LENGTH_SHORT).show();
                 for(int i=0;i<h*w;i++){
                    final ImageButton b = new ImageButton(getApplicationContext());
@@ -82,14 +102,8 @@ public class GameActivity extends AppCompatActivity {
                     b.setPadding(0,0,0,0);
 
                     glmreza.addView(b);
-                    time=0;
-                    Timer t=new Timer();
-                    t.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            time++;
-                        }
-                    },1000,1000);
+
+
                     GridLayout.LayoutParams param =new GridLayout.LayoutParams();
                     if(rootH/h<rootW/w) {
                         param.height = rootH / h - 20;

@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="rs.systempro.igramemorije.GameActivity"
     android:id="@+id/rlRoot">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0s"
+        android:id="@+id/twTime"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
 
     <GridLayout
         android:id="@+id/glMreza"
