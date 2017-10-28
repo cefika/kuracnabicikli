@@ -30,11 +30,12 @@ import static rs.systempro.igramemorije.R.id.image;
 
 public class GameActivity extends AppCompatActivity {
 
-    int solve;
+    int solved;
     ImageButton firstOpened;
     ImageButton secondOpened;
     int numofOpened;
     int time;
+    Timer timer;
     ArrayList<Drawable> images;
 
     @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
@@ -49,9 +50,9 @@ public class GameActivity extends AppCompatActivity {
         //;
 
         time=0;
-        final Timer t=new Timer();
+        timer=new Timer();
         final TextView tv= (TextView)findViewById(R.id.twTime);
-        t.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 time++;
@@ -65,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
         },1000,1000);
 
         images=new ArrayList<>();
-        solve=0;
+        solved=0;
         numofOpened=0;
         for(int i=0;i<(h*w)/2;i++)
         {
@@ -128,6 +129,14 @@ public class GameActivity extends AppCompatActivity {
                                 secondOpened.setImageDrawable(null);
                                 firstOpened=b;
                                 b.setImageDrawable(image);
+                                solved++;
+                                if(++solved ==h*w/2)
+                                {
+                                    timer.cancel();
+                                    Intent intent=new Intent(getApplicationContext(), Gameover.class);
+                                    intent.putExtra("t",time);
+                                    startActivity(intent);
+                                }
                             }
                             else if(numofOpened==1)
                                 {
